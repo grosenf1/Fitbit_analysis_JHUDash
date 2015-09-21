@@ -1,0 +1,64 @@
+# ------Just set up the playground and some of them maybe redundant-------------
+#However, you'd better load all of them,because these packages are all cute and nice!
+
+setwd("~/desktop")
+install.packages("fitbitScraper")
+library("fitbitScraper")
+install.packages("accelerometry")
+library(accelerometry)
+library("ggplot2") 
+library(data.table)
+
+# ------Prepare the all_data dataset we will analyze-------------
+
+start_date <- as.Date("2015-04-12")
+end_date <- as.Date("2015-06-12")
+data_to_get = "steps" # or "distance", "floors", "active-minutes", "calories-burned", "heart-rate"
+
+# Initialize empty data frame
+all_data = data.frame(day=as.Date(character()), time=character(), steps=integer(), stringsAsFactors=FALSE)
+
+# Loop over days and scrape
+date_seq = seq(start_date, to = end_date, by = "day")
+i = 1
+while (i <= length(date_seq)) {
+        print(i)
+        # Scraper call
+        one_day_data = get_intraday_data(cookie, "steps", date = as.character(date_seq[i])) 
+        i = i+1
+        
+        # Pull date and time into separate columns
+        one_day_data$day = format(one_day_data$time, format = "%Y-%m-%d")
+        one_day_data$time = format(one_day_data$time, format = "%H:%M:%S")
+        
+        # Combine across days
+        all_data = rbind(all_data, one_day_data)
+}
+
+# Add weekday label to the all_data
+
+weekday <- weekdays(as.Date(all_data$day))
+all_data[, "Weekdays"] <- weekday
+
+# ------------------Plot the time vs steps-----------------------
+plot_time_vs_steps<-ggplot(all_data, aes(x=time,y=steps)) +
+        geom_histogram(binwidth=.5, colour="black", fill="white",stat="identity")
+
+# Define the threshold of steps and find the most energetic time period
+all_data <- data.table(all_data)
+all_data[,stepsum:=sum(steps),by=time]
+subset.all.data <- all_data[1:sum(all_data[,day]=="2015-04-12"),list(time,stepsum)]
+threshold.time.vec <- which(subset.all.data[,get("stepsum")]>10000)
+
+# Mark the most energetic time period on the plot
+plot_time_vs_steps + geom_vline(aes(xintercept=threshold.time.vec,color='red'))
+
+# ------------------The most energetic time period-----------------
+all_data[threshold.time.vec,time]
+
+# Subset the all_data to eliminate 0 steps
+all_sub_for_weekdays <- subset(all_data, steps!=0)
+
+# ------------------Describe the most energtic weekdays with histgram----------------
+ggplot(all_sub_for_weekdays, aes(x=Weekdays,y=steps)) +
+        geom_histogram(binwidth=.5, colour="black", fill="white",stat="identity")
