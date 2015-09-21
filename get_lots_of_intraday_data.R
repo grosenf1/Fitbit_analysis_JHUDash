@@ -5,6 +5,9 @@
 # Create cookie w/ your fitbit account login info
 #cookie <- login(email="fitbit login email", password = "fitbit password")
 
+# Need lubridate
+library(lubridate)
+
 # Specify dates and data
 start_date <- as.Date("2015-01-01")
 end_date <- as.Date("2015-09-15")
