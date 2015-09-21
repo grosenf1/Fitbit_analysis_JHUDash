@@ -32,4 +32,4 @@ steps_df$date = format(steps_df$time, format = "%Y-%m-%d")
 steps_df$wday = wday(steps_df$time, label=TRUE, abbr=TRUE)
 steps_df$hour = hour(steps_df$time)
 steps_df$minute = minute(steps_df$time)
-
+steps_df$month = month(steps_df$time)
