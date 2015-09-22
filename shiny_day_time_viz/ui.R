@@ -26,7 +26,11 @@ shinyUI(fluidPage(
       hr(),
       
       h1("Mean steps per hour by time of day ", align="center"),
-      plotOutput("stepsTimePlot")
+      plotOutput("stepsTimePlot"),
+      hr(),
+      
+      h1("Mean hours of sleep by day of week", align="center"),
+      plotOutput("sleepDaysPlot")
       )
   )
   
