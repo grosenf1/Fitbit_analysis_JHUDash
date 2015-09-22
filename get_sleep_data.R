@@ -17,11 +17,7 @@ user_id <- readline("What is your name or id? ")
 file.name <- paste0("data", "/", user_id, "_", "sleep.csv")
 
 # pull sleep data from fitbit
-<<<<<<< Updated upstream
 sleep <- get_sleep_data(cookie, start_date = "2014-10-01", end_date = "2015-09-20")
-=======
-sleep <- get_sleep_data(cookie, start_date = "2015-05-08", end_date = "2015-09-21")
->>>>>>> Stashed changes
 
 # convert sleep list() to a data frame
 sleep_df <- data.frame(lapply(sleep$df, as.character), stringsAsFactors=FALSE)
