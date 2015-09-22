@@ -73,6 +73,7 @@ names(all_data) <- c("id", "time", "steps", "date", "DofW.steps",
                      "sleepQuality.A", "DofW.sleep", "HofD.sleep", "MofH.sleep",
                      "month.sleep")
 
+save(all_data, file = "data/all_data.Rdata")
 # Note: I have no ordered the data at this point of checked for sort order
 #
 # usage
