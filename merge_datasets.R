@@ -13,7 +13,7 @@ library(lubridate)
 library(dplyr)
 
 # Set appropriate working directory
-setwd("~/dev/R/Fitbit_analysis_JHUDash/")
+#setwd("~/dev/R/Fitbit_analysis_JHUDash/")
 cat(paste0("Current working directory is: ", getwd()))
 
 steps_format <- function(x, f) {
@@ -76,5 +76,20 @@ names(all_data) <- c("id", "time", "steps", "date", "DofW.steps",
 save(all_data, file = "data/all_data.Rdata")
 # Note: I have no ordered the data at this point of checked for sort order
 #
-# usage
+# usage below
+
+# filter all_data by a single day, hours of sleep, and user id == 1
 filter(all_data, date == ymd("2015-09-07") & HofD.sleep == 2 & id == 1)
+
+# filter by user id and Sept
+# group by date
+# create a total steps column
+# select distinct date, total steps, duration, and quality A
+all_data %>% filter(id == 1 & date > ymd("2015-09-01")) %>%
+  group_by(date) %>%
+  mutate(total_steps = sum(steps)) %>%
+  select(total_steps,
+            sleep.duration,
+            sleepQuality.A) %>%
+  distinct()
+
