@@ -1,9 +1,12 @@
 #library(lubridate)
 
+tot_stepsDay <- all_data %>% group_by(id,date) %>% summarise(steps_dayTotal = sum(steps))
+
 #df = read.csv2(file = 'pathtofile',header = T,sep = ',',stringsAsFactors=F)
 
 processSleepDF <- function(df){
   df$date = ymd(df$date)
+  df$month = month(df$date)
   df$wday = wday(df$date,label=T)
   df$startTime = hm(df$startTime)
   df$startTimeHour = hour(df$startTime)
