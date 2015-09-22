@@ -16,7 +16,7 @@ user_id <- readline("What is your name or id? ")
 file.name <- paste0("data", "/", user_id, "_", "steps.csv")
 
 # Specify dates and data
-start_date <- as.Date("2015-01-01")
+start_date <- as.Date("2014-10-01")
 end_date <- as.Date("2015-09-15")
 data_to_get = "steps" # or "distance", "floors", "active-minutes", "calories-burned", "heart-rate"
 
