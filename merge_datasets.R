@@ -15,7 +15,6 @@ library(dplyr)
 # Set appropriate working directory
 #setwd("~/dev/R/Fitbit_analysis_JHUDash/")
 cat(paste0("Current working directory is: ", getwd()))
-
 steps_format <- function(x, f) {
   steps <- read.csv(f, row.names = NULL, header = T, stringsAsFactors=F) # step data
   steps <- cbind(id = x, steps)
@@ -44,8 +43,8 @@ sleep_format <- function(x, f) {
   sleep
 }
 
-df.steps <- data.frame()
-df.sleep <- data.frame()
+all_data <- data.frame()
+
 sleep.files <- list.files(path = "data", pattern = "sleep", full.names=T)
 steps.files <- list.files(path = "data", pattern = "step", full.names=T)
 
@@ -55,15 +54,12 @@ steps.files <- strsplit(steps.files, split = " ")
 for (s in 1:length(sleep.files)) {
   # steps
   sleep <- sleep_format(s, sleep.files[[s]])
-  df.sleep <- rbind(df.sleep, sleep)
-}
-
-for (s in 1:length(steps.files)) {
   steps <- steps_format(s, steps.files[[s]])
-  df.steps <- rbind(df.steps, steps)
+    #combined <- inner_join(sleep, steps, by="date") 
+    combined_by_id <- full_join(steps, sleep, by="date")
+    all_data <- rbind(all_data, combined_by_id)
 }
-
-all_data <- inner_join(df.steps, df.sleep, by="date")
+#all_data <- inner_join(df.steps, df.sleep, by="id")
 
 names(all_data) <- c("id", "time", "steps", "date", "DofW.steps",
                      "HofD.steps", "MofH.steps", "month.steps",
