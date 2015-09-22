@@ -1,5 +1,5 @@
 shinyUI(fluidPage(
-  titlePanel("Fitbit Steps by day and time"),
+  titlePanel("JHU DaSH - Team Fitbit"),
   
   sidebarLayout(
     sidebarPanel( 
@@ -18,10 +18,14 @@ shinyUI(fluidPage(
                          selected = c("Mon","Tues","Wed","Thurs","Fri"))
     ),
     mainPanel(
-      textOutput("idText"),
-      textOutput("dateText"),
-      plotOutput("stepsPlot"),
+#      textOutput("idText"),
+#      textOutput("dateText"),
+#      plotOutput("stepsPlot"),
+      h1("Mean total steps by day of week", align="center"),
       plotOutput("stepsDayPlot"),
+      hr(),
+      
+      h1("Mean steps per hour by time of day ", align="center"),
       plotOutput("stepsTimePlot")
       )
   )
