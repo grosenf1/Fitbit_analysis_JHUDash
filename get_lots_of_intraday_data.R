@@ -7,6 +7,13 @@
 
 # Need lubridate
 library(lubridate)
+# change this setting for git working directory
+# setwd("~/dev/R/Fitbit_analysis_JHUDash/")
+cat(paste0("Current working directory is: ", getwd()))
+# get the user name or id for thier step data
+user_id <- readline("What is your name or id? ")
+
+file.name <- paste0("data", "/", user_id, "_", "steps.csv")
 
 # Specify dates and data
 start_date <- as.Date("2015-01-01")
@@ -36,3 +43,5 @@ steps_df$wday = wday(steps_df$time, label=TRUE, abbr=TRUE)
 steps_df$hour = hour(steps_df$time)
 steps_df$minute = minute(steps_df$time)
 steps_df$month = month(steps_df$time)
+                     
+write.csv(steps_df, file = file.name, row.names = F)
