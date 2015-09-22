@@ -9,8 +9,9 @@ shinyUI(fluidPage(
       
       dateRangeInput("start.end.date", 
                      label = "Dates", 
-                     max=today(), 
-                     start = today()-30),
+                     #max=today(), 
+                     #start = today()-30
+                     ),
       
       checkboxGroupInput("DofW", 
                          label="Days of the Week to include", 
@@ -27,6 +28,10 @@ shinyUI(fluidPage(
       
       h1("Mean steps per hour by time of day ", align="center"),
       plotOutput("stepsTimePlot"),
+      hr(),
+      
+      h1("Density plot of step counts", align="center"),
+      plotOutput("stepcountDensity"),
       hr(),
       
       h1("Mean hours of sleep by day of week", align="center"),

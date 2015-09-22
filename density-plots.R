@@ -2,7 +2,7 @@ library(dplyr)
 library(lubridate)
 library(ggplot2)
 
-load('~/dev/R/Fitbit_analysis_JHUDash/data/all_data.Rdata')
+load('~/Desktop/Fitbit_analysis_JHUDash/data/all_data.Rdata')
 
 all_data <- all_data %>% filter(!is.na(id))
 all_data$id <- factor(all_data$id)
