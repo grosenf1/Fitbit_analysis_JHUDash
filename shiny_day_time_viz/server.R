@@ -23,7 +23,7 @@ shinyServer(
       data <- all_data[all_data$id==input$id,]
       data <- data[as.Date(data$date) >= as.Date(input$start.end.date[1]),]
       data <- data[as.Date(data$date) <= as.Date(input$start.end.date[2]),]
-      data <- data[data$DofW.steps %in% input$DofW,]
+      #data <- data[data$DofW.steps %in% input$DofW,]
       
       # Strip zero-step days
       z <- (data$tot_steps==0)
@@ -40,7 +40,7 @@ shinyServer(
       data <- all_data[all_data$id==input$id,]
       data <- data[as.Date(data$date) >= as.Date(input$start.end.date[1]),]
       data <- data[as.Date(data$date) <= as.Date(input$start.end.date[2]),]
-      data <- data[data$DofW.steps %in% input$DofW,]
+      #data <- data[data$DofW.steps %in% input$DofW,]
       
       # Strip zero-step days
       z <- (data$tot_steps==0)
@@ -67,7 +67,7 @@ shinyServer(
       data <- all_data[all_data$id==input$id,]
       data <- data[as.Date(data$date) >= as.Date(input$start.end.date[1]),]
       data <- data[as.Date(data$date) <= as.Date(input$start.end.date[2]),]
-      data <- data[data$DofW.steps %in% input$DofW,]
+      #data <- data[data$DofW.steps %in% input$DofW,]
       
       # Strip zero-step days
       z <- (data$tot_steps==0)
@@ -86,7 +86,8 @@ shinyServer(
               axis.title.x=element_text(size = 25, vjust = -.3),
               axis.text.y=element_text(size=20, vjust=0.5),
               legend.position="none"
-        )
+        ) + 
+        facet_grid(. ~ DofW.steps, drop = T)
       
     })
     
@@ -99,7 +100,7 @@ shinyServer(
       data <- all_data[all_data$id==input$id,]
       data <- data[as.Date(data$date) >= as.Date(input$start.end.date[1]),]
       data <- data[as.Date(data$date) <= as.Date(input$start.end.date[2]),]
-      data <- data[data$DofW.steps %in% input$DofW,]
+      #data <- data[data$DofW.steps %in% input$DofW,]
       
       # Strip zero-step days
       z <- (data$tot_steps==0)
@@ -130,7 +131,7 @@ shinyServer(
       data <- all_data[all_data$id==input$id,]
       data <- data[as.Date(data$date) >= as.Date(input$start.end.date[1]),]
       data <- data[as.Date(data$date) <= as.Date(input$start.end.date[2]),]
-      data <- data[data$DofW.steps %in% input$DofW,]
+      #data <- data[data$DofW.steps %in% input$DofW,]
       
       # Strip zero-step days
       z <- (data$tot_steps==0)
@@ -160,7 +161,7 @@ shinyServer(
       data <- all_data[all_data$id==input$id,]
       data <- data[as.Date(data$date) >= as.Date(input$start.end.date[1]),]
       data <- data[as.Date(data$date) <= as.Date(input$start.end.date[2]),]
-      data <- data[data$DofW.steps %in% input$DofW,]
+      #data <- data[data$DofW.steps %in% input$DofW,]
       
       # Make plot
       ggplot(data=data,
