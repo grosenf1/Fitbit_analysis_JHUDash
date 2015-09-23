@@ -9,8 +9,8 @@ shinyUI(fluidPage(
       
       dateRangeInput("start.end.date", 
                      label = "Dates", 
-                     #max=today(), 
-                     #start = today()-30
+                     start = "2015-01-01",
+                     end = "2015-09-20"
                      ),
       
       checkboxGroupInput("DofW", 
@@ -32,6 +32,10 @@ shinyUI(fluidPage(
       
       h1("Density plot of step counts", align="center"),
       plotOutput("stepcountDensity"),
+      hr(),
+      
+      h1("Step count trend over time", align="center"),
+      plotOutput("trendOverTimePlot"),
       hr(),
       
       h1("Mean hours of sleep by day of week", align="center"),
